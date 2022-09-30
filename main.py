@@ -36,13 +36,18 @@ class MainScr(Screen):
                 text = randint(0, text+1999)
             else:
                 text = randint(0, text*2)
+            if int(self.txt.text) > text:
+                pro = 'проиграли'
+                text = int(self.txt.text) - text
+            else:
+                pro = 'выйграли'
             text = str(text)
-            self.lbl.text = 'Вы выйграли: {}'.format(text)
+            self.lbl.text = 'Вы {}: {}'.format(pro, text)
         except:
             self.txt.text = '0'
             self.lbl.text = 'Это не число!'
     def menutoplay(self):
-        self.manager.transition.direction = 'right'
+        self.manager.transition.direction = 'left'
         self.manager.current = 'howtoplay'
 
 class HowToPlayScr(Screen):
@@ -60,7 +65,7 @@ class HowToPlayScr(Screen):
         btn.on_press = self.next
         self.add_widget(layout)
     def next(self):
-        self.manager.transition.direction = 'left'
+        self.manager.transition.direction = 'right'
         self.manager.current = 'main'
 
         
