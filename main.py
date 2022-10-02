@@ -7,6 +7,9 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from random import randint
+from kivy.core.window import Window
+
+Window.clearcolor = (1, 1, 0, 1)
 
 Config.set('graphics', 'width', 500)
 Config.set('graphics', 'height', 500)
@@ -15,7 +18,7 @@ class MainScr(Screen):
     def __init__(self, name='main'):
         super().__init__(name=name)
         layout = BoxLayout(orientation='vertical',padding=80, spacing=40)
-        self.txt = TextInput()
+        self.txt = TextInput(multiline=False)
         self.lbl = Label(text='Вы выйграли: 0')
         btnHow = Button(text='Как играть?')
         btn = Button(text='Сделать ставку')
@@ -31,16 +34,18 @@ class MainScr(Screen):
         try:
             text = int(text)
             if text >= 1000:
-                text = randint(0, text+5906)
+                text = randint(0, text*4)
             elif text >= 500 and text < 1000:
-                text = randint(0, text+1999)
+                text = randint(0, text*3)
             else:
                 text = randint(0, text*2)
-            if int(self.txt.text) > text:
+            if int(self.txt.text) >= text:
                 pro = 'проиграли'
                 text = int(self.txt.text) - text
+            
             else:
                 pro = 'выйграли'
+                text = 'Баланс {}'.format(text)
             text = str(text)
             self.lbl.text = 'Вы {}: {}'.format(pro, text)
         except:
