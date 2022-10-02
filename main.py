@@ -9,7 +9,7 @@ from kivy.uix.button import Button
 from random import randint
 from kivy.core.window import Window
 
-Window.clearcolor = (1, 1, 0, 1)
+Window.clearcolor = (.36, .112, .49, 1)
 
 Config.set('graphics', 'width', 500)
 Config.set('graphics', 'height', 500)
